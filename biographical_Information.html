@@ -1,0 +1,104 @@
+<html>
+    
+    
+
+    <head>
+        
+        <link rel="stylesheet" href="style.css"> 
+        <title>ILR Form</title>
+     
+    </head>
+    
+    
+    
+    <body>
+        
+        
+        <!-- top navigation -->
+        <div class="topnav">
+              <a class="active" href="search.html">Search for Student</a>
+              <a href="#biographical">Biographical Information</a>
+              <a href="#admissions">Admissions Information</a>
+              <a href="#Miscellaneous">Miscellaneous Notes</a>
+        </div>
+         
+        <!-- LRC logo -->
+        <img src="LRCLogo.png" alt="Logo" style="width:200px;height:80px;">
+        
+            
+        <header>
+            
+                <h1>Chemistry Department</h1><br> 
+                <h2>Undergraduate Individual Learning Record</h2>
+            
+        </header>
+        
+        
+        <h2 id="title">Biographical Information </h2> 
+        
+    
+        <div id="form-div1">
+            
+            <form action="" method="post">
+
+                <!-- these are some text field -->
+                <p><strong>Unique ID:</strong> <input type="text" name="ID" required placeholder="student unique ID">
+                <strong>First Name:</strong> <input type="text" name="fName" required placeholder="student first name">
+                <strong>Last Name:</strong> <input type="text" name="lName" required placeholder="student last name"> </p>
+
+                
+                <!-- this is a checked box and printing date -->
+                <p id="now">  <p>Student is still enrolled at Laroche: <input type="checkbox" checked></p>
+
+                
+                <!-- these are some radio buttons to for major -->
+                <p id="div"><strong>Student Major:</strong>
+                    
+                <input type="radio" name="major" required value="chemistry"> Chemistry
+                <input type="radio" name="major" required value="bioChemistry"> BioChemistry
+                <input type="radio"  name="major" required value="other" onclick="setVisible('other')"> 
+
+                Other:
+                <input type="text" id='other' placeholder="Type other major" name="Other" required style='visibility: hidden'>
+
+                    
+                <!-- this is another radio menue for semster -->
+                <strong>Semester:</strong> 
+
+                Fall <input type="radio" name="semester" required value="fa">
+                Spring <input type="radio" name="semester" required value="sp">
+                Summer <input type="radio" name="semester" required value="su"></p>
+
+                
+                <!-- this is a selecting menue for year -->
+                <p><strong>Year:</strong>
+
+                <select>
+                        
+                    <option>Freshmen</option>
+                    <option>Sophomore</option>
+                    <option>Junior</option>
+                    <option selected>Senior</option>
+                        
+                </select>
+
+
+                <!-- uploading photo -->
+                <strong>Upload photo:</strong> <input type="file" name="pic" accept="image/*"> </p> 
+
+
+                <!-- buttons -->
+                <!-- <p> <button onclick="alert('Student is added')">Add Student</button> -->
+                <input type="submit" value="Submit">
+                <input type="reset" value="Clear">
+
+
+            </form>
+            
+        </div>
+        
+        <script type="text/javascript" src="script.js"></script>
+        
+    <body>
+    
+<html>
