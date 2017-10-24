@@ -38,7 +38,7 @@
                 <form method="post" enctype="multipart/form-data"> 
                     
                      <input type="file" name="image" id="image"/ onchange="loadFile(event)">  
-                     <img id="output"/>
+                     <img src = "" heigh="200" width="200"  id="output"/ >
                     
                      <br />  
                     

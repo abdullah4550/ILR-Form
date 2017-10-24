@@ -66,7 +66,7 @@
     
     <body>
 
-         <table border="2" style= "background-color: #84ed86; color: #761a9b; margin: 0 auto;" >
+         <table border="2" style= "background-color: brown; color: white; margin: 0 auto;" >
              
           <thead>
 
@@ -74,7 +74,7 @@
 
                   <th>Unique_id</th>
                   <th>First_Name</th>
-                  <th>Second_Name</th>
+                  <th>Last_Name</th>
                   <th>Major</th>
                   <th>Semester</th>
                   <th>Year</th>
@@ -90,11 +90,11 @@
 <?php
 
 
-    $connector = mysqli_connect("localhost", "ILRdb", "", "ILRdb");
+    include("connection.php");
 
     $query = "SELECT * FROM `Students`";
 
-    if ($result = mysqli_query($connector, $query)) {
+    if ($result = mysqli_query($link, $query)) {
 
         while($row = mysqli_fetch_array($result)){
 
@@ -102,13 +102,13 @@
             echo
             "<tr>
 
-              <td>{$row['UniqueID']}</td>
-              <td>{$row['FirstName']}</td>
-              <td>{$row['LastName']}</td>
-              <td>{$row['Major']}</td>
-              <td>{$row['Semster']}</td>
-              <td>{$row['Year']}</td> 
-              <td>{$row['Date']}</td>
+                  <td>{$row['Student_UniqueID']}</td>
+                  <td>{$row['Student_FirstName']}</td>
+                  <td>{$row['Student_LastName']}</td>
+                  <td>{$row['Student_Major']}</td>
+                  <td>{$row['Student_Semster']}</td>
+                  <td>{$row['Student_Year']}</td> 
+                  <td>{$row['Date_Modified']}</td> 
 
             </tr>\n";
         }

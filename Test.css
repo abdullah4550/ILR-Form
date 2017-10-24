@@ -1,13 +1,13 @@
 body {
     margin:0;
     padding:0;
-    background-color: linen;
+    background-color: bisque;
 }
 
 
 .topnav {
   overflow: hidden;
-  background-color:brown;
+  background: linear-gradient(to top left, black, brown);
 }
 
 .topnav a {
@@ -31,31 +31,31 @@ body {
 }
 
 .topnav a.logOut {
-    background-color:black;
     color: white;
     margin-left: 300px;
 }
 
 div.container {
-            width: 100%;
-            border: 1px solid gray;
+    width: 100%;
+    border: 1px solid gray;
 }
 
 header {
-    padding: 0.7em;
+    padding: 0.1em;
     color: white;
-    background-color:brown;
+    background: linear-gradient(to top left, black, brown);
     clear: left;
     text-align: center;
+    text-shadow: 2px 2px 4px black;
     opacity: 1;
 }
 
 img {
     display: block;
     margin: 0 auto;
-    background-color: linen;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    background-color: bisque;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 /*
@@ -89,7 +89,11 @@ studentImage {
 
 #form-div1{
     text-align: center; 
-    border: 2px black solid;
+    border: 2px brown solid;
+    max-width: 530px;
+    padding: 15px;
+    margin: 10 auto;
+    border-radius: 0.3em;
     
    
 }

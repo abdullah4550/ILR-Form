@@ -1,8 +1,6 @@
 <!--//this file is the php file for entering a new student to the db-->
 
 <html>
-    
-    
 
     <head>
         
@@ -84,6 +82,7 @@
                         <option value="Other">Other</option>
                         
                     </select>
+                    
                 <div id="div1"></div>
                     
 
@@ -111,14 +110,14 @@
 
 
                 <!-- uploading photo -->
-                <p><strong>Upload photo:</strong> <input type="file" name="image" accept="image/*"> </p> 
+               
+                <p><strong>Upload photo:</strong> <input type="file" name="image" id="image"/ onchange="loadFile(event)"> </p> 
+                 <img src = "" heigh="200" width="200"  id="output"/>
                 
-                
-          
 
 
                 <!-- buttons -->
-                <input type="submit" value="Submit">
+                <input type="submit" name="submit" id="submit" value="submit">
                 <input type="reset" value="Clear">
 
 
@@ -140,81 +139,47 @@
     
  <?php
     
-    //Chekcing if a student ID has been entered to make the connection or link to the datebase. 
-    if (array_key_exists('ID', $_POST)) {
-        
-        $link = mysqli_connect("localhost", "ILRdb", "", "ILRdb");
+        //Chekcing if a student ID has been entered to make the connection or link to the datebase. 
+        include("connection.php");
 
-            if (mysqli_connect_error()) {
-        
-                die ("There was an error connecting to the database");
-        
-            } 
-       
-       
-       
-       
-        // Here we check if an entered ID exists in the database
-        $query = "SELECT `UniqueID` FROM `Students` WHERE UniqueID = '".mysqli_real_escape_string($link, $_POST['ID'])."'";
-            
-        $result = mysqli_query($link, $query);
-            
-        if (mysqli_num_rows($result) > 0) {
-                
-            echo '<script type="text/javascript">alert("Student exists in the database");</script>';
-            
 
-        } else {
-            
-            
-            //Entring feild inputs to each column of "Studnts table" of "ILRdb datsbase"
-            $query = "INSERT INTO `Students` (`UniqueID`, `FirstName`, `LastName`, `Major`, `Semster`, `Year`, `Date`) VALUES ('".mysqli_real_escape_string($link, $_POST['ID'])."', '".mysqli_real_escape_string($link, $_POST['fName'])."', '".mysqli_real_escape_string($link, $_POST['lName'])."', '".mysqli_real_escape_string($link, $_POST['major'])."', '".mysqli_real_escape_string($link, $_POST['semester'])."', '".mysqli_real_escape_string($link, $_POST['year'])."', CURRENT_TIMESTAMP)";
-            
-            
-            
-            
-            
-        /*    if(is_uploaded_file($_FILES['image']['Chemicals'])){
-                
-                $sImage = addslashes(fread(fopen($_FILES['image']['Chemicals'], "r"), filesize(['image']['Chemicals'])));
-                $stu->set_student_photo($SImage);
-                */
-                
-                
-            
-            
-            
-            
-            
-            
-            //This will check if a student has been entered before or not
-            if (mysqli_query($link, $query)) {
+        if(isset($_POST["submit"]))  {
 
-                echo '<script type="text/javascript">alert("Student has been added");</script>';
+            $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));  
+
+
+
+
+            // Here we check if an entered ID exists in the database
+            $query = "SELECT `Student_UniqueID` FROM `Students` WHERE Student_UniqueID = '".mysqli_real_escape_string($link, $_POST['ID'])."'";
+
+            $result = mysqli_query($link, $query);
+
+            if (mysqli_num_rows($result) > 0) {
+
+                echo '<script type="text/javascript">alert("Student exists in the database. You can update this student data by pressing the update student tab");</script>';
+
 
             } else {
 
-                echo "<p>There was a problem adding the student form!";
 
-            }
-            
-            
-            
-            
-            
-            /*//After adding a new student to the db, this will show all students in the database
-            $query = "SELECT * FROM `Students`";
+                //Entring feild inputs to each column of "Studnts table" of "ILRdb datsbase"
+                $query = "INSERT INTO `Students` (`Student_UniqueID`, `Student_FirstName`, `Student_LastName`, `Student_Major`, `Student_Semster`, `Student_Year`, `Student_Image`, `Date_Modified`) VALUES ('".mysqli_real_escape_string($link, $_POST['ID'])."', '".mysqli_real_escape_string($link, $_POST['fName'])."', '".mysqli_real_escape_string($link, $_POST['lName'])."', '".mysqli_real_escape_string($link, $_POST['major'])."', '".mysqli_real_escape_string($link, $_POST['semester'])."', '".mysqli_real_escape_string($link, $_POST['year'])."', ('$file'), CURRENT_TIMESTAMP)";
 
-            if ($result = mysqli_query($link, $query)) {
-                
-                while($row = mysqli_fetch_array($result)){
-                    
-                     echo "<p>Student ID is: --> ".$row[0]."<p>Student first name is: --> ".$row[1]."<p>Student last name: --> ".$row[2]." <p>Student major is: --> ".$row[3]."<p>Student semester is: --> ".$row[4]."<p>Student year is: --> ".$row[5]."<p/> <br>";
-                    
+
+
+                //This will check if a student has been entered before or not
+                if (mysqli_query($link, $query)) {
+
+                    echo '<script type="text/javascript">alert("Student has been added");</script>';
+
+                } else {
+
+                    echo "<p>There was a problem adding the student form!";
+
                 }
-        }*/
-    }  
+        }  
 }
-    
-    
+
+
 ?>

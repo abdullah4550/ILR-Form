@@ -43,7 +43,7 @@
             
             if ($_POST['signUp'] == '1') {
             
-                $query = "SELECT id FROM `users` WHERE email = '".mysqli_real_escape_string($link, $_POST['email'])."' LIMIT 1";
+                $query = "SELECT id FROM `Users` WHERE email = '".mysqli_real_escape_string($link, $_POST['email'])."' LIMIT 1";
 
                 $result = mysqli_query($link, $query);
 
@@ -53,7 +53,7 @@
 
                 } else {
 
-                    $query = "INSERT INTO `users` (`email`, `password`) VALUES ('".mysqli_real_escape_string($link, $_POST['email'])."', '".mysqli_real_escape_string($link, $_POST['password'])."')";
+                    $query = "INSERT INTO `Users` (`email`, `password`) VALUES ('".mysqli_real_escape_string($link, $_POST['email'])."', '".mysqli_real_escape_string($link, $_POST['password'])."')";
 
                     if (!mysqli_query($link, $query)) {
 
@@ -61,7 +61,7 @@
 
                     } else {
 
-                        $query = "UPDATE `users` SET password = '".md5(md5(mysqli_insert_id($link)).$_POST['password'])."' WHERE id = ".mysqli_insert_id($link)." LIMIT 1";
+                        $query = "UPDATE `Users` SET password = '".md5(md5(mysqli_insert_id($link)).$_POST['password'])."' WHERE id = ".mysqli_insert_id($link)." LIMIT 1";
                         
                         $id = mysqli_insert_id($link);
                         
@@ -83,7 +83,7 @@
                 
             } else {
                     
-                    $query = "SELECT * FROM `users` WHERE email = '".mysqli_real_escape_string($link, $_POST['email'])."'";
+                    $query = "SELECT * FROM `Users` WHERE email = '".mysqli_real_escape_string($link, $_POST['email'])."'";
                 
                     $result = mysqli_query($link, $query);
                 
@@ -118,9 +118,7 @@
                     }
                     
                 }
-            
         }
-        
         
     }
 

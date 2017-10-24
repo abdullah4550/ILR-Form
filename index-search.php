@@ -54,34 +54,6 @@
 
                 <!-- these are the 3 required text field to search for a student-->
                 <p><strong>Unique ID:</strong> <input name="ID" type="text" required placeholder="student unique ID">
-   
-                    
-                    
-             <!--   <form method="POST" action="index.php" enctype="multipart/form-data">
-                    
-                    <input type="hidden" name="size" value="1000000">
-                    
-                    <div>
-                        
-                        <input type="file" name="image">
-                        
-                    </div>
-                    
-                    <div>
-                        
-                        <textarea id="text" cols="40" rows="4" name="image_text" placeholder="Say something about this image..."></textarea>
-                        
-                    </div>
-                    
-                    <div>
-                        
-                        <button type="submit" name="upload">POST</button>
-                        
-                    </div>-->
-
-                
-                    
-                    
                     
                     
                 <!-- buttons -->
@@ -119,7 +91,7 @@
     
     <body>
 
-         <table border="2" style= "background-color: #84ed86; color: #761a9b; margin: 0 auto;" >
+         <table border="2" style= "background-color: brown; color: white; margin: 0 auto;" >
              
           <thead>
 
@@ -127,7 +99,7 @@
 
                   <th>Unique_id</th>
                   <th>First_Name</th>
-                  <th>Second_Name</th>
+                  <th>Last_Name</th>
                   <th>Major</th>
                   <th>Semester</th>
                   <th>Year</th>
@@ -142,52 +114,50 @@
 
     
 <?php
-    $db_hostname = 'localhost';
-    $db_username = 'ILRdb';
-    $db_password = '';
-    $db_database = 'ILRdb';
+   
+    include("connection.php");
 
-    // Database Connection String
-    $con = mysqli_connect($db_hostname,$db_username,$db_password, $db_username);
-    if (!$con){
-        
-      die('Could not connect: ' . mysql_error());
-        
-      }
-
-    mysqli_select_db($con, $db_database);
+    mysqli_select_db($link, $db_database);
 
 
     if (!empty($_REQUEST['ID'])){
 
-        $term = mysqli_real_escape_string($con, $_REQUEST['ID']);     
+        $term = mysqli_real_escape_string($link, $_REQUEST['ID']);     
 
-        $sql = "SELECT * FROM Students WHERE UniqueID LIKE '%".$term."%'"; 
-        $result = mysqli_query($con, $sql); 
+        $sql = "SELECT * FROM Students WHERE Student_UniqueID LIKE '%".$term."%'"; 
+        $result = mysqli_query($link, $sql); 
 
         if (mysqli_num_rows($result) < 1) {
 
             echo '<script type="text/javascript">alert("Student is not found");</script>';
             
         } else {
-
-
-            while($row = mysqli_fetch_array($result)){ 
+            
+            
+              while($row = mysqli_fetch_array($result)){ 
                 
-            echo
-            "<tr>
+                echo
+                "<tr>
 
-              <td>{$row['UniqueID']}</td>
-              <td>{$row['FirstName']}</td>
-              <td>{$row['LastName']}</td>
-              <td>{$row['Major']}</td>
-              <td>{$row['Semster']}</td>
-              <td>{$row['Year']}</td> 
-              <td>{$row['Date']}</td> 
+                  <td>{$row['Student_UniqueID']}</td>
+                  <td>{$row['Student_FirstName']}</td>
+                  <td>{$row['Student_LastName']}</td>
+                  <td>{$row['Student_Major']}</td>
+                  <td>{$row['Student_Semster']}</td>
+                  <td>{$row['Student_Year']}</td> 
+                  <td>{$row['Date_Modified']}</td> 
 
-            </tr>\n";
+                </tr>\n";
+
+                       echo '  
+
+                                        <img src="data:image/jpeg;base64,'.base64_encode($row['Student_Image'] ).'" height="200" width="200" class="img-thumnail" />  
+
+                         ';  
                 
                 }  
+
+          
             }
         }        
 ?> 

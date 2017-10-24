@@ -78,18 +78,11 @@
 <?php
 
 // php code to Update data from mysql database Table
-
     if(isset($_POST['update'])){
-
-           $hostname = "localhost";
-           $username = "ILRdb";
-           $password = "";
-           $databaseName = "ILRdb";
-
-           $connect = mysqli_connect($hostname, $username, $password, $databaseName);
+        
+            include("connection.php");
 
            // get values form input text and number
-
            $id = $_POST['UniqueID'];
            $fname = $_POST['FirstName'];
            $lname = $_POST['LastName'];
@@ -98,9 +91,9 @@
            $year = $_POST['Year'];
 
            // mysql query to Update data
-            $query = "UPDATE `Students` SET `FirstName`='".$fname."',`LastName`='".$lname."',`Major`='".$major."',`Semster`='".$semester."',`Year`='".$year."' WHERE `UniqueID` = $id";
+            $query = "UPDATE `Students` SET `Student_FirstName`='".$fname."',`Student_LastName`='".$lname."',`Student_Major`='".$major."',`Student_Semster`='".$semester."',`Student_Year`='".$year."' WHERE `Student_UniqueID` = $id";
         
-           $result = mysqli_query($connect, $query);
+           $result = mysqli_query($link, $query);
 
         
            if($result){
@@ -109,10 +102,10 @@
                
            } else {
                
-               echo 'Data Not Updated';
+               echo '<script type="text/javascript">alert("Data is not updated");</script>';
                
            }
-           mysqli_close($connect);
+           mysqli_close($link);
     }
-
+    
 ?>
